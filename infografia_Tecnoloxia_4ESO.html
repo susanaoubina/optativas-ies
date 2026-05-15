@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecnoloxía · 4ºESO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@400;600;700&display=swap');
+  :root {
+    --bg: #0a0a1a; --card: #0f1535;
+    --accent1: #3b82f6; --accent2: #84cc16; --accent3: #fbbf24;
+    --glow1: rgba(59,130,246,0.4); --glow2: rgba(132,204,22,0.4);
+    --text: #e2e8f0; --muted: #94a3b8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); font-family:'Exo 2',sans-serif; color:var(--text); width:680px; margin:0 auto; overflow-x:hidden; }
+
+  .hero { position:relative; min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 30px 30px; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.35) 0%,transparent 70%),radial-gradient(ellipse at 80% 60%,rgba(132,204,22,0.2) 0%,transparent 60%); }
+  .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(59,130,246,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.07) 1px,transparent 1px); background-size:40px 40px; animation:gridMove 20s linear infinite; }
+  @keyframes gridMove { from{background-position:0 0} to{background-position:40px 40px} }
+  .badge { position:relative; background:linear-gradient(135deg,var(--accent1),var(--accent2)); padding:4px 18px; border-radius:20px; font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; box-shadow:0 0 20px var(--glow1); }
+  .hero h1 { position:relative; font-family:'Orbitron',monospace; font-size:48px; font-weight:900; line-height:1.1; background:linear-gradient(135deg,#fff 20%,var(--accent3) 60%,var(--accent1) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+  .hero-sub { position:relative; font-size:17px; color:var(--accent3); font-weight:600; letter-spacing:1px; margin-bottom:22px; }
+  .brain-anim { position:relative; font-size:80px; animation:float 3s ease-in-out infinite; filter:drop-shadow(0 0 20px var(--accent1)); }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .section { margin:12px 20px; border-radius:16px; padding:26px 28px; position:relative; overflow:hidden; }
+  .section::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent1),transparent); }
+  .s-hook   { background:linear-gradient(135deg,#0a0f1a,#0f1535); border:1px solid rgba(59,130,246,0.4); }
+  .s-what   { background:linear-gradient(135deg,#0a150a,#0f1535); border:1px solid rgba(132,204,22,0.4); }
+  .s-content{ background:linear-gradient(135deg,#0f1535,#0a0f1a); border:1px solid rgba(59,130,246,0.3); }
+  .s-future { background:linear-gradient(135deg,#1a1a0a,#0a100a); border:1px solid rgba(251,191,36,0.4); }
+  .s-method { background:linear-gradient(135deg,#0a150a,#0f1535); border:1px solid rgba(132,204,22,0.3); }
+  .s-profile{ background:linear-gradient(135deg,#0f1535,#0a0f1a); border:1px solid rgba(59,130,246,0.3); }
+
+  .section-title { font-family:'Orbitron',monospace; font-size:15px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .title-blue   { color:var(--accent1); }
+  .title-lime   { color:var(--accent2); }
+  .title-amber  { color:var(--accent3); }
+  .title-line   { flex:1; height:1px; background:currentColor; opacity:0.3; }
+
+  .hook-box { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.4); border-radius:12px; padding:18px 20px; margin-bottom:14px; position:relative; }
+  .hook-box:last-child { margin-bottom:0; }
+  .hook-emoji { font-size:28px; position:absolute; top:-14px; left:18px; background:var(--bg); padding:0 6px; }
+  .hook-text { font-size:16px; line-height:1.6; padding-top:6px; }
+  .hook-text strong { color:var(--accent2); font-weight:700; }
+
+  .do-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .do-card { background:rgba(132,204,22,0.07); border:1px solid rgba(132,204,22,0.25); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:6px; }
+  .do-icon { font-size:26px; }
+  .do-title { font-weight:700; font-size:14px; color:var(--accent2); }
+  .do-desc  { font-size:13px; color:var(--muted); line-height:1.4; }
+
+  .highlight-quote { background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(132,204,22,0.1)); border-radius:12px; padding:16px 20px; margin-bottom:16px; font-size:16px; font-weight:700; text-align:center; line-height:1.5; border:1px solid rgba(59,130,246,0.3); }
+  .blink { animation:blink 1.5s step-end infinite; }
+  @keyframes blink { 50%{opacity:0} }
+
+  .content-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .content-list li { display:flex; align-items:flex-start; gap:12px; background:rgba(59,130,246,0.08); border-radius:10px; padding:12px 14px; border-left:3px solid var(--accent1); }
+  .content-num { font-family:'Orbitron',monospace; font-size:13px; font-weight:900; color:var(--accent1); min-width:24px; padding-top:1px; }
+  .content-text { font-size:14px; line-height:1.4; }
+  .content-text span { display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+
+  .future-intro { font-size:15px; line-height:1.6; margin-bottom:16px; }
+  .future-intro strong { color:var(--accent3); }
+  .career-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .career-pill { background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.35); border-radius:8px; padding:10px 8px; text-align:center; font-size:12px; font-weight:600; color:var(--accent3); line-height:1.3; }
+  .career-icon { font-size:20px; display:block; margin-bottom:4px; }
+
+  .method-steps { display:flex; flex-direction:column; gap:10px; }
+  .method-step { display:flex; align-items:center; gap:14px; background:rgba(132,204,22,0.06); border-radius:10px; padding:12px 16px; }
+  .step-icon { font-size:24px; flex-shrink:0; }
+  .step-text { font-size:14px; line-height:1.4; }
+
+  .profile-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chip { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); border-radius:20px; padding:6px 14px; font-size:13px; font-weight:600; color:#93c5fd; display:flex; align-items:center; gap:6px; }
+
+  .footer { text-align:center; padding:28px 20px; color:var(--muted); font-size:13px; }
+  .footer-badge { display:inline-block; background:linear-gradient(135deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700; font-size:15px; margin-top:6px; }
+  .pulse { display:inline-block; width:8px; height:8px; background:var(--accent2); border-radius:50%; box-shadow:0 0 0 0 rgba(132,204,22,0.7); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(132,204,22,0.7)} 70%{box-shadow:0 0 0 8px rgba(132,204,22,0)} 100%{box-shadow:0 0 0 0 rgba(132,204,22,0)} }
+  .divider { height:1px; margin:4px 20px; background:linear-gradient(90deg,transparent,rgba(59,130,246,0.3),rgba(132,204,22,0.3),transparent); }
+
+  @media print {
+    @page { size:A4; margin:0; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body { width:210mm; }
+    .hero-grid,.brain-anim,.pulse,.blink { animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="badge">4º ESO · Optativa</div>
+  <h1>TECNOLOXÍA</h1>
+  <div class="hero-sub">Constrúe. Programa. Innova.</div>
+  <div class="brain-anim">⚙️</div>
+</div>
+
+<div class="section s-hook">
+  <div class="section-title title-blue"><span>⚡</span> ¿SABÍAS QUE…? <span class="title-line"></span></div>
+  <div class="hook-box">
+    <span class="hook-emoji">🔧</span>
+    <p class="hook-text">La ingeniería, la robótica y la automatización son los sectores con <strong>más crecimiento laboral del mundo</strong>. Los profesionales que saben construir, programar y diseñar son los <strong>más demandados del siglo XXI</strong>.</p>
+  </div>
+  <div class="hook-box">
+    <span class="hook-emoji">🎓</span>
+    <p class="hook-text">Tecnoloxía es la <strong>puerta de entrada al Bachillerato Tecnológico</strong> y a los mejores ciclos formativos de FP. Si te interesa construir, programar o diseñar, <strong>esta materia es tu trampolín</strong>.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-what">
+  <div class="section-title title-lime"><span>🚀</span> ¿QUÉ VAS A HACER? <span class="title-line"></span></div>
+  <div class="highlight-quote">No solo aprendes tecnología — la <strong>diseñas, construyes y programas</strong> tú mismo <span class="blink">▊</span></div>
+  <div class="do-grid">
+    <div class="do-card"><span class="do-icon">🤖</span><div class="do-title">Programar robots</div><div class="do-desc">Diseña y programa robots y sistemas automáticos desde cero</div></div>
+    <div class="do-card"><span class="do-icon">🏗️</span><div class="do-title">Construir proyectos</div><div class="do-desc">Diseña, fabrica y valora tus propios productos tecnológicos</div></div>
+    <div class="do-card"><span class="do-icon">⚡</span><div class="do-title">Circuitos y máquinas</div><div class="do-desc">Monta y controla sistemas mecánicos y eléctricos reales</div></div>
+    <div class="do-card"><span class="do-icon">🖥️</span><div class="do-title">Automatización</div><div class="do-desc">Aprende a que las máquinas hagan el trabajo por ti</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-content">
+  <div class="section-title title-blue"><span>📚</span> CONTENIDOS <span class="title-line"></span></div>
+  <ul class="content-list">
+    <li><span class="content-num">01</span><div class="content-text"><strong>O proxecto tecnolóxico</strong><span>Do problema á solución: método de deseño e fabricación</span></div></li>
+    <li><span class="content-num">02</span><div class="content-text"><strong>Deseño e fabricación</strong><span>CAD, impresión 3D, materiais e ferramentas</span></div></li>
+    <li><span class="content-num">03</span><div class="content-text"><strong>Elementos de máquinas, sistemas e robots</strong><span>Mecánica, electrónica, sensores e actuadores</span></div></li>
+    <li><span class="content-num">04</span><div class="content-text"><strong>Programación, automatización e robótica</strong><span>Arduino, Scratch, control de sistemas</span></div></li>
+    <li><span class="content-num">05</span><div class="content-text"><strong>Documentación e comunicación dixital</strong><span>Presenta e documenta os teus proxectos tecnolóxicos</span></div></li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-future">
+  <div class="section-title title-amber"><span>🔮</span> TU FUTURO CON ESTA MATERIA <span class="title-line"></span></div>
+  <p class="future-intro">Si te gusta construir y entender cómo funcionan las cosas, <strong>el mundo tecnológico te espera</strong>.</p>
+  <div class="career-grid">
+    <div class="career-pill"><span class="career-icon">🔬</span>Bachillerato<br>Tecnolóxico</div>
+    <div class="career-pill"><span class="career-icon">⚙️</span>Enxeñaría<br>& Industria</div>
+    <div class="career-pill"><span class="career-icon">🏗️</span>Arquitectura<br>& Deseño</div>
+    <div class="career-pill"><span class="career-icon">🤖</span>Robótica<br>& Mecatrónica</div>
+    <div class="career-pill"><span class="career-icon">💡</span>FP Electricidade<br>& Electrónica</div>
+    <div class="career-pill"><span class="career-icon">🚗</span>Automoción<br>& Aeronáutica</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-method">
+  <div class="section-title title-lime"><span>⚙️</span> CÓMO TRABAJAMOS <span class="title-line"></span></div>
+  <div class="method-steps">
+    <div class="method-step"><span class="step-icon">🎥</span><p class="step-text">Prácticas guiadas con <strong>videotutoriales</strong> — aprendes el proceso paso a paso</p></div>
+    <div class="method-step"><span class="step-icon">👥</span><p class="step-text"><strong>Trabajo cooperativo</strong> — diseñas, construyes y evalúas en equipo</p></div>
+    <div class="method-step"><span class="step-icon">🛠️</span><p class="step-text">Aprendes <strong>HACIENDO</strong> — del plano al producto real con tus manos</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-profile">
+  <div class="section-title title-blue"><span>🎯</span> ¿ESTA MATERIA ES PARA TI? <span class="title-line"></span></div>
+  <div style="font-size:15px;line-height:1.6;margin-bottom:16px;">✅ <strong>SÍ</strong>, si te identificas con alguno de estos perfiles:</div>
+  <div class="profile-chips">
+    <div class="chip">🔧 Te gusta montar y desmontar cosas</div>
+    <div class="chip">⚡ Te interesan los circuitos y la electricidad</div>
+    <div class="chip">🤖 Sueñas con programar robots</div>
+    <div class="chip">🎓 Piensas en Bachillerato Tecnolóxico o FP</div>
+    <div class="chip">🏗️ Quieres aprender a diseñar y fabricar</div>
+    <div class="chip">💡 Preguntas siempre "¿cómo funciona esto?"</div>
+  </div>
+  <div style="margin-top:16px;background:rgba(59,130,246,0.1);border-radius:10px;padding:14px;font-size:14px;color:var(--muted);border-left:3px solid var(--accent1);">
+    👉 <strong style="color:var(--text);">Para futuros estudiantes de Bachillerato Tecnológico, ciclos formativos y todo el alumnado apasionado por crear y construir.</strong>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="pulse"></span>&nbsp;Materia optativa · 4º ESO&nbsp;<span class="pulse"></span>
+  <div class="footer-badge">¿A qué esperas para elegirla? ⚙️</div>
+</div>
+
+</body>
+</html>
