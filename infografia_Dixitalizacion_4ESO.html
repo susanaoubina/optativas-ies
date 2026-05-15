@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dixitalización · 4ºESO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@400;600;700&display=swap');
+  :root {
+    --bg: #0a0a1a; --card: #0f1535;
+    --accent1: #06b6d4; --accent2: #10b981; --accent3: #f59e0b;
+    --glow1: rgba(6,182,212,0.4); --glow2: rgba(16,185,129,0.4);
+    --text: #e2e8f0; --muted: #94a3b8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); font-family:'Exo 2',sans-serif; color:var(--text); width:680px; margin:0 auto; overflow-x:hidden; }
+
+  .hero { position:relative; min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 30px 30px; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(6,182,212,0.35) 0%,transparent 70%),radial-gradient(ellipse at 80% 60%,rgba(16,185,129,0.2) 0%,transparent 60%); }
+  .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(16,185,129,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.07) 1px,transparent 1px); background-size:40px 40px; animation:gridMove 20s linear infinite; }
+  @keyframes gridMove { from{background-position:0 0} to{background-position:40px 40px} }
+  .badge { position:relative; background:linear-gradient(135deg,var(--accent1),var(--accent2)); padding:4px 18px; border-radius:20px; font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; box-shadow:0 0 20px var(--glow1); }
+  .hero h1 { position:relative; font-family:'Orbitron',monospace; font-size:44px; font-weight:900; line-height:1.1; background:linear-gradient(135deg,#fff 20%,var(--accent1) 60%,var(--accent2) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+  .hero-sub { position:relative; font-size:17px; color:var(--accent1); font-weight:600; letter-spacing:1px; margin-bottom:22px; }
+  .brain-anim { position:relative; font-size:80px; animation:float 3s ease-in-out infinite; filter:drop-shadow(0 0 20px var(--accent1)); }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .section { margin:12px 20px; border-radius:16px; padding:26px 28px; position:relative; overflow:hidden; }
+  .section::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent1),transparent); }
+  .s-hook   { background:linear-gradient(135deg,#0a1a2e,#0f1535); border:1px solid rgba(6,182,212,0.4); }
+  .s-what   { background:linear-gradient(135deg,#0a1f1a,#0f1535); border:1px solid rgba(16,185,129,0.4); }
+  .s-content{ background:linear-gradient(135deg,#0f1535,#0a1a2e); border:1px solid rgba(6,182,212,0.3); }
+  .s-future { background:linear-gradient(135deg,#1a1a0a,#1a0f0a); border:1px solid rgba(245,158,11,0.4); }
+  .s-method { background:linear-gradient(135deg,#0a1f1a,#0f1535); border:1px solid rgba(16,185,129,0.3); }
+  .s-profile{ background:linear-gradient(135deg,#0f1535,#0a1a2e); border:1px solid rgba(6,182,212,0.3); }
+
+  .section-title { font-family:'Orbitron',monospace; font-size:15px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .title-cyan  { color:var(--accent1); }
+  .title-green { color:var(--accent2); }
+  .title-amber { color:var(--accent3); }
+  .title-line  { flex:1; height:1px; background:currentColor; opacity:0.3; }
+
+  .hook-box { background:rgba(6,182,212,0.12); border:1px solid rgba(6,182,212,0.45); border-radius:12px; padding:18px 20px; margin-bottom:14px; position:relative; }
+  .hook-box:last-child { margin-bottom:0; }
+  .hook-emoji { font-size:28px; position:absolute; top:-14px; left:18px; background:var(--bg); padding:0 6px; }
+  .hook-text { font-size:16px; line-height:1.6; padding-top:6px; }
+  .hook-text strong { color:var(--accent1); font-weight:700; }
+
+  .do-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .do-card { background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:6px; }
+  .do-icon { font-size:26px; }
+  .do-title { font-weight:700; font-size:14px; color:var(--accent2); }
+  .do-desc  { font-size:13px; color:var(--muted); line-height:1.4; }
+
+  .highlight-quote { background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(16,185,129,0.1)); border-radius:12px; padding:16px 20px; margin-bottom:16px; font-size:16px; font-weight:700; text-align:center; line-height:1.5; border:1px solid rgba(6,182,212,0.3); }
+  .blink { animation:blink 1.5s step-end infinite; }
+  @keyframes blink { 50%{opacity:0} }
+
+  .content-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .content-list li { display:flex; align-items:flex-start; gap:12px; background:rgba(6,182,212,0.08); border-radius:10px; padding:12px 14px; border-left:3px solid var(--accent1); }
+  .content-num { font-family:'Orbitron',monospace; font-size:13px; font-weight:900; color:var(--accent1); min-width:24px; padding-top:1px; }
+  .content-text { font-size:14px; line-height:1.4; }
+  .content-text span { display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+
+  .future-intro { font-size:15px; line-height:1.6; margin-bottom:16px; }
+  .future-intro strong { color:var(--accent3); }
+  .career-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .career-pill { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.35); border-radius:8px; padding:10px 8px; text-align:center; font-size:12px; font-weight:600; color:var(--accent3); line-height:1.3; }
+  .career-icon { font-size:20px; display:block; margin-bottom:4px; }
+
+  .method-steps { display:flex; flex-direction:column; gap:10px; }
+  .method-step { display:flex; align-items:center; gap:14px; background:rgba(16,185,129,0.06); border-radius:10px; padding:12px 16px; }
+  .step-icon { font-size:24px; flex-shrink:0; }
+  .step-text { font-size:14px; line-height:1.4; }
+
+  .profile-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chip { background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.4); border-radius:20px; padding:6px 14px; font-size:13px; font-weight:600; color:#67e8f9; display:flex; align-items:center; gap:6px; }
+
+  .footer { text-align:center; padding:28px 20px; color:var(--muted); font-size:13px; }
+  .footer-badge { display:inline-block; background:linear-gradient(135deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700; font-size:15px; margin-top:6px; }
+  .pulse { display:inline-block; width:8px; height:8px; background:var(--accent2); border-radius:50%; box-shadow:0 0 0 0 rgba(16,185,129,0.7); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)} 70%{box-shadow:0 0 0 8px rgba(16,185,129,0)} 100%{box-shadow:0 0 0 0 rgba(16,185,129,0)} }
+  .divider { height:1px; margin:4px 20px; background:linear-gradient(90deg,transparent,rgba(6,182,212,0.3),rgba(16,185,129,0.3),transparent); }
+
+  @media print {
+    @page { size:A4; margin:0; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body { width:210mm; }
+    .hero-grid,.brain-anim,.pulse,.blink { animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="badge">4º ESO · Optativa</div>
+  <h1>DIXITALIZACIÓN</h1>
+  <div class="hero-sub">Competencia dixital para o mundo real</div>
+  <div class="brain-anim">💻</div>
+</div>
+
+<div class="section s-hook">
+  <div class="section-title title-cyan"><span>⚡</span> ¿SABÍAS QUE…? <span class="title-line"></span></div>
+  <div class="hook-box">
+    <span class="hook-emoji">🌍</span>
+    <p class="hook-text">El <strong>90% de los empleos</strong> ya requieren competencias digitales. Saber configurar, programar y analizar datos no es solo para informáticos — es una habilidad esencial para <strong>cualquier profesión del siglo XXI</strong>.</p>
+  </div>
+  <div class="hook-box">
+    <span class="hook-emoji">🎓</span>
+    <p class="hook-text">En Bachillerato tendrás <strong>TIC</strong>, y Dixitalización es la preparación perfecta. Te dará una <strong>ventaja real</strong> tanto para el Bachillerato Tecnológico como para cualquier otra rama.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-what">
+  <div class="section-title title-green"><span>🚀</span> ¿QUÉ VAS A HACER? <span class="title-line"></span></div>
+  <div class="highlight-quote">No solo <em>usas</em> la tecnología — aprendes a <strong>controlarla y dominarla</strong> <span class="blink">▊</span></div>
+  <div class="do-grid">
+    <div class="do-card"><span class="do-icon">🔧</span><div class="do-title">Configurar dispositivos</div><div class="do-desc">Conecta, configura y soluciona problemas en redes y dispositivos del día a día</div></div>
+    <div class="do-card"><span class="do-icon">📊</span><div class="do-title">Analizar datos</div><div class="do-desc">Interpreta y visualiza información de forma práctica y útil</div></div>
+    <div class="do-card"><span class="do-icon">🎨</span><div class="do-title">Crear contenido digital</div><div class="do-desc">Edita imágenes, vídeos y documentos con herramientas profesionales</div></div>
+    <div class="do-card"><span class="do-icon">🛡️</span><div class="do-title">Seguridad online</div><div class="do-desc">Protégete en internet y navega de forma crítica y segura</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-content">
+  <div class="section-title title-cyan"><span>📚</span> CONTENIDOS <span class="title-line"></span></div>
+  <ul class="content-list">
+    <li><span class="content-num">01</span><div class="content-text"><strong>Dispositivos dixitais, sistemas operativos e comunicación</strong><span>Redes, hardware, software e configuración</span></div></li>
+    <li><span class="content-num">02</span><div class="content-text"><strong>Creación e edición de información e contidos dixitais</strong><span>Imaxes, vídeo, audio, documentos</span></div></li>
+    <li><span class="content-num">03</span><div class="content-text"><strong>Pensamento computacional</strong><span>Lóxica, algoritmos, programación básica</span></div></li>
+    <li><span class="content-num">04</span><div class="content-text"><strong>Seguridade e benestar dixital</strong><span>Privacidade, identidade dixital, hábitos seguros</span></div></li>
+    <li><span class="content-num">05</span><div class="content-text"><strong>Cidadanía dixital crítica</strong><span>Desinformación, dereitos dixitais, ética online</span></div></li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-future">
+  <div class="section-title title-amber"><span>🔮</span> TU FUTURO CON ESTA MATERIA <span class="title-line"></span></div>
+  <p class="future-intro">La competencia digital es <strong>transversal — la necesitas en TODAS las profesiones</strong>, vayas donde vayas.</p>
+  <div class="career-grid">
+    <div class="career-pill"><span class="career-icon">💻</span>Bachillerato<br>Tecnolóxico</div>
+    <div class="career-pill"><span class="career-icon">🏢</span>Administración<br>& Empresa</div>
+    <div class="career-pill"><span class="career-icon">🏥</span>Sanidade<br>& Ciencias</div>
+    <div class="career-pill"><span class="career-icon">🎨</span>Deseño<br>& Comunicación</div>
+    <div class="career-pill"><span class="career-icon">⚖️</span>Dereito<br>& Social</div>
+    <div class="career-pill"><span class="career-icon">🎓</span>Calquera<br>carreira</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-method">
+  <div class="section-title title-green"><span>⚙️</span> CÓMO TRABAJAMOS <span class="title-line"></span></div>
+  <div class="method-steps">
+    <div class="method-step"><span class="step-icon">🎥</span><p class="step-text">Prácticas guiadas con <strong>videotutoriales</strong> paso a paso — aprendes a tu ritmo sin experiencia previa</p></div>
+    <div class="method-step"><span class="step-icon">👥</span><p class="step-text">Trabajo <strong>individual y en grupos</strong> — colaboras para resolver retos digitales reales</p></div>
+    <div class="method-step"><span class="step-icon">🔍</span><p class="step-text"><strong>Investigación y análisis</strong> — te quedas con los conceptos clave, no solo los pasos</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section s-profile">
+  <div class="section-title title-cyan"><span>🎯</span> ¿ESTA MATERIA ES PARA TI? <span class="title-line"></span></div>
+  <div style="font-size:15px;line-height:1.6;margin-bottom:16px;">✅ <strong>SÍ</strong>, si te identificas con alguno de estos perfiles:</div>
+  <div class="profile-chips">
+    <div class="chip">📱 Usas tecnología pero quieres entenderla</div>
+    <div class="chip">🔒 Te preocupa tu privacidad online</div>
+    <div class="chip">🎓 Piensas en Bachillerato Tecnolóxico</div>
+    <div class="chip">📊 Te interesan los datos y el análisis</div>
+    <div class="chip">🌐 Quieres dominar las herramientas digitales</div>
+    <div class="chip">🚀 Quieres ventaja para el futuro</div>
+  </div>
+  <div style="margin-top:16px;background:rgba(6,182,212,0.1);border-radius:10px;padding:14px;font-size:14px;color:var(--muted);border-left:3px solid var(--accent1);">
+    👉 <strong style="color:var(--text);">No importa si vas a Ciencias, Letras, Artes o FP.</strong> La competencia digital te será útil en cualquier camino.
+  </div>
+</div>
+
+<div class="footer">
+  <span class="pulse"></span>&nbsp;Materia optativa · 4º ESO&nbsp;<span class="pulse"></span>
+  <div class="footer-badge">¿A qué esperas para elegirla? 💻</div>
+</div>
+
+</body>
+</html>
